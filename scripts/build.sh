@@ -31,5 +31,5 @@ docker build \
     --build-arg TML_VERSION="$TMOD_LOADER_VERSION" \
     --build-arg UID="1000" \
     --build-arg GID="1000" \
-    -t "tmodloader-server:latest" \UID
+    -t "tmodloader-server:latest" \
     -f ./server/DedicatedServerUtils/Dockerfile ./server

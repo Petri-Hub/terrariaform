@@ -3,3 +3,7 @@ installation:
 
 build:
 	scripts/build.sh
+
+hosting:
+	$(MAKE) installation
+	$(MAKE) build

@@ -1,5 +1,5 @@
-# Server folders
-server/**/*
-
 # Environment variables
 .env
+
+# Server transient files
+server/

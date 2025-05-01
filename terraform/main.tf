@@ -7,7 +7,6 @@ terraform {
   }
 }
 
-
 provider "vultr" {
   api_key = var.api_key
 }
@@ -16,7 +15,6 @@ resource "vultr_ssh_key" "terrariaform_ssh_key" {
   name    = "terrariaform-key"
   ssh_key = var.public_ssh_key
 }
-
 
 resource "vultr_startup_script" "terrariaform-startup-script" {
   name        = "terrariaform-startup-script"

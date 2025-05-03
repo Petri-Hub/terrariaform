@@ -22,4 +22,4 @@ services:
       - "TMOD_USECONFIGFILE=${TMOD_USECONFIGFILE}"
       - "UPDATE_NOTICE=${UPDATE_NOTICE}"
     volumes:
-      - "./server:/data"
+      - "./services/server:/data"

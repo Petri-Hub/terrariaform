@@ -53,3 +53,10 @@ resource "vultr_ssh_key" "terrariaform_ssh_key" {
   name    = "terrariaform-key"
   ssh_key = var.public_ssh_key
 }
+
+resource "vultr_reserved_ip" "terrariaform-reserved-ip" {
+  label = "terrariaform-reserved-ip"
+  region = var.region
+  ip_type = "v4"
+  instance_id = vultr_instance.terrariaform-server.id
+}

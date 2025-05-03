@@ -1,0 +1,18 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "author": {
+    "name": "Fernando Petri",
+    "email": "fernando.petri01@gmail.com",
+    "url": "https://petri.codes"
+  },
+  "scripts": {
+    "dev": "bun run --hot /src/index.ts"
+  },
+  "dependencies": {
+    "hono": "^4.7.8"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

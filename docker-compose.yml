@@ -1,7 +1,7 @@
 services:
-  tmodloader:
+  server:
     image: 'jacobsmile/tmodloader1.4:latest'
-    container_name: 'tmodloader'
+    container_name: 'terrariaform-server'
     restart: unless-stopped
     ports:
       - "7777:7777"
@@ -23,3 +23,14 @@ services:
       - "UPDATE_NOTICE=${UPDATE_NOTICE}"
     volumes:
       - "./services/server:/data"
+  api:
+    container_name: terrariaform-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    build: 
+      context: ./services/api
+      dockerfile: ./docker/Dockerfile 
+    environment:
+      - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"
+    

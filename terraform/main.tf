@@ -19,7 +19,6 @@ resource "vultr_instance" "terrariaform-server" {
   script_id = vultr_startup_script.terrariaform-startup-script.id
   firewall_group_id = vultr_firewall_group.terrariaform-firewall.id 
   ssh_key_ids = [vultr_ssh_key.terrariaform_ssh_key.id]
-
 }
 
 resource "vultr_startup_script" "terrariaform-startup-script" {
@@ -54,6 +53,3 @@ resource "vultr_ssh_key" "terrariaform_ssh_key" {
   name    = "terrariaform-key"
   ssh_key = var.public_ssh_key
 }
-
-
-

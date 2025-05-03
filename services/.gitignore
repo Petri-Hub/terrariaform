@@ -1,3 +1,8 @@
-# All game server files
+# Game server files
 /server/*
 !/server/.gitkeep
+
+# API server files
+/api/bun.lock
+/api/node_modules
+/api/bun.lock

@@ -1,10 +1,11 @@
 import { Hono } from 'hono'
+import { StatusCode } from '../constants/StatusCodes'
 
 const health = new Hono()
 
 health.get('/', () => {
     return new Response(null, {
-        status: 200
+        status: StatusCode.OK
     })
 })
 

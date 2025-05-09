@@ -4,22 +4,22 @@ import { SystemService } from '../services/SystemService'
 export const system = new Hono()
 
 system.get('/os', async () => {
-    const information = await SystemService.getOperatingSystemInformation()
+    const details = await SystemService.getOperatingSystemDetails()
 
     return Response
-        .json(information)
+        .json(details)
 })
 
 system.get('/cpu', async () => {
-    const information = await SystemService.getCpuDetails()
+    const details = await SystemService.getCpuDetails()
 
     return Response
-        .json(information)
+        .json(details)
 })
 
 system.get('/memory', async () => {
-    const information = await SystemService.getMemoryDetails()
+    const details = await SystemService.getMemoryDetails()
 
     return Response
-        .json(information)
+        .json(details)
 })

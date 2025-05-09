@@ -1,12 +1,13 @@
 import { Hono } from 'hono'
-import { env } from 'hono/adapter'
+import { errorHandler } from './middlewares/errorHandlerMiddleware'
+import { health } from './routes/health'
+import { system } from './routes/system'
 
 const app = new Hono()
 
-app.get('/', (c) => {
-  const { API_HEALTH_CHECK_TEXT } = env(c)
+app.use(errorHandler)
 
-  return c.text(`Hello from Hono! ${API_HEALTH_CHECK_TEXT}`)
-})
+app.route('/health', health)
+app.route('/system', system)
 
 export default app

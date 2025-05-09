@@ -1,3 +1,3 @@
 export enum ErrorMessage {
-    TestMessage = 'Test message'
+    CpuDetailsRetrievalError = 'failed to retrieve CPU details',
 }

@@ -1,7 +1,6 @@
-import { HTTPException } from 'hono/http-exception'
-import { ContentfulStatusCode, StatusCode } from 'hono/utils/http-status'
-import { ErrorMessages as ErrorMessage } from '../constants/ErrorMessags'
+import { ErrorMessage } from '../constants/ErrorMessags'
 import { ErrorCode } from '../constants/ErrorCode'
+import { StatusCode } from '../constants/StatusCode'
 
 export abstract class DomainError {
     constructor(

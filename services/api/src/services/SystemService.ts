@@ -1,4 +1,3 @@
-import si from 'systeminformation'
 import { CpuDetails } from '../types/CpuInformation'
 import { CpuService } from './CpuService'
 import { MemoryService } from './MemoryService'

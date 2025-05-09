@@ -3,13 +3,6 @@ import { SystemService } from '../services/SystemService'
 
 export const system = new Hono()
 
-system.get('/', async () => {
-    const information = await SystemService.getSystemInformation()
-
-    return Response
-        .json(information)
-})
-
 system.get('/os', async () => {
     const information = await SystemService.getOperatingSystemInformation()
 
@@ -25,7 +18,7 @@ system.get('/cpu', async () => {
 })
 
 system.get('/memory', async () => {
-    const information = await SystemService.getMemoryInformation()
+    const information = await SystemService.getMemoryDetails()
 
     return Response
         .json(information)

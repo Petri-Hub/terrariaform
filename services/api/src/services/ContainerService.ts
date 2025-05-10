@@ -1,5 +1,6 @@
 import si from "systeminformation";
-import { CpuUsageDetails } from '../types/CpuUsageDetails'
+import { ContainerUsageDetails } from "../types/ContainerUsageDetails";
+import { simplifyPercentage } from '../utils/simplifyPercentage'
 
 export abstract class ContainerService{
     static async getContainers(){
@@ -10,21 +11,18 @@ export abstract class ContainerService{
             si.dockerContainerStats()
         ])
 
-        console.log(containers)
-
         for(const container of containers){
             const usage = usages.find((usage) => {
                 return usage.id == container.id
             })
 
             if(!usage){
-                console.log('n achei');
-                
                 continue
             }
 
-            const cpuUsage: CpuUsageDetails = {
-                total: usage?.cpuPercent
+            const containerUsage: ContainerUsageDetails = {
+                cpu: simplifyPercentage(usage.cpuPercent),
+                memory: usage.memUsage
             }
 
             details.push({
@@ -32,14 +30,9 @@ export abstract class ContainerService{
                 name: container.name,
                 image: container.image,
                 status: container.state.toUpperCase(),
-                usage: {
-                    cpu: {
-                        total: usages
-                    }
-                },
+                usage: containerUsage,
                 createdAt: container.createdAt,
-                startedAt: container.startedAt,
-                finishedAt: container.finishedAt
+                startedAt: container.startedAt
             })
         }
         

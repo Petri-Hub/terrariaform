@@ -12,7 +12,4 @@ app.route('/health', health)
 app.route('/system', system)
 app.route('/containers', containers)
 
-export default {
-    fetch: app.fetch,
-    port: process.env.PORT
-}
+export default app

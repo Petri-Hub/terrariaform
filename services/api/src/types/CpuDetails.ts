@@ -1,4 +1,4 @@
-import { CpuUsageDetails } from "./CpuUsageInformation"
+import { CpuUsageDetails } from "./CpuUsageDetails"
 
 export type CpuDetails = {
     name: string

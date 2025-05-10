@@ -1,10 +1,12 @@
 import { CpuDetails } from '../types/CpuInformation'
+import { MemoryDetails } from '../types/MemoryDetails'
+import { OperatingSystemDetails } from '../types/OperatingSystemDetails'
 import { CpuService } from './CpuService'
 import { MemoryService } from './MemoryService'
 import { OperatingSystemService } from './OperatingSystemService'
 
 export abstract class SystemService {
-    static async getOperatingSystemInformation() {
+    static async getOperatingSystemDetails(): Promise<OperatingSystemDetails>{
         return await OperatingSystemService.getDetails()
     }
 
@@ -12,7 +14,7 @@ export abstract class SystemService {
         return await CpuService.getDetails();
     }
 
-    static async getMemoryDetails() {
+    static async getMemoryDetails() : Promise<MemoryDetails> {
         return await MemoryService.getDetails()
     }
 }

@@ -34,6 +34,11 @@ resource "aws_vpc_security_group_ingress_rule" "terrariaform-game-allow" {
   cidr_ipv4 = "0.0.0.0/0"
 }
 
+resource "aws_key_pair" "terrariaform-ssh-key" {
+  key_name   = "terrariaform-ssh-key"
+  public_key = file("~/.ssh/Projects/terrariaform/aws_instance.pub")
+}
+
 data "aws_ami" "terrariaform-ami" {
   most_recent = true
   owners      = ["136693071363"] # Debian project owner ID
@@ -59,6 +64,7 @@ resource "aws_instance" "example" {
   instance_type = var.instance_type
   
   vpc_security_group_ids = [aws_security_group.terrariaform-sg.id]
+  key_name = aws_key_pair.terrariaform-ssh-key.key_name
 
   tags = {
     Name = "terrariaform-server"

@@ -14,14 +14,17 @@ provider "aws" {
 data "aws_ami" "terrariaform-ami" {
   most_recent = true
   owners      = ["136693071363"] # Debian project owner ID
+
   filter {
     name   = "name"
     values = ["debian-12-amd64-*"]
   }
+
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
+  
   filter {
     name   = "root-device-type"
     values = ["ebs"]
@@ -33,7 +36,7 @@ resource "aws_ami" "terrariaform-ami" {
 }
 
 resource "aws_instance" "example" {
-  ami           = data.aws_ami.debian12.id
+  ami           = data.aws_ami.terrariaform-ami.id
   instance_type = var.instance_type
   
   tags = {

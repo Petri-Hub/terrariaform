@@ -23,14 +23,14 @@ services:
       - "UPDATE_NOTICE=${UPDATE_NOTICE}"
     volumes:
       - "./services/server:/data"
-  api:
-    container_name: terrariaform-api
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    build: 
-      context: ./services/api
-      dockerfile: ./docker/Dockerfile 
-    environment:
-      - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"
+  # api:
+  #   container_name: terrariaform-api
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   build: 
+  #     context: ./services/api
+  #     dockerfile: ./docker/Dockerfile 
+  #   environment:
+  #     - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"
     

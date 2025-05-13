@@ -27,7 +27,7 @@ mkdir -p $INSTALLATION_DIRECTORY
 
 # Cloning Terrariaform repository
 echo "Cloning Terrariaform repository..."
-git clone https://github.com/Petri-Hub/terrariaform.git $INSTALLATION_DIRECTORY
+git clone -b feat/aws-provider https://github.com/Petri-Hub/terrariaform.git $INSTALLATION_DIRECTORY
 
 # Creating .env variable (TODO: Pull from cloud)
 echo "Creating .env variable..."

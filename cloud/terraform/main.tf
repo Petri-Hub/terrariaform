@@ -43,7 +43,7 @@ resource "aws_vpc_security_group_egress_rule" "terrariaform-all-egress" {
 
 resource "aws_key_pair" "terrariaform-ssh-key" {
   key_name   = "terrariaform-ssh-key"
-  public_key = file("~/.ssh/Projects/terrariaform/aws_instance.pub")
+  public_key = file(var.ssh_key_path)
 }
 
 data "aws_ami" "terrariaform-ami" {

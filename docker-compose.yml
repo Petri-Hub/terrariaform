@@ -33,4 +33,3 @@ services:
   #     dockerfile: ./docker/Dockerfile 
   #   environment:
   #     - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"
-    

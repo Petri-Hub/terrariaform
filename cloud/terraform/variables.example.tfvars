@@ -1,5 +1,3 @@
-api_key =
-instance =
-os =
 region = 
-public_ssh_key = 
+instance_type = 
+ssh_key_path =

@@ -1,62 +1,82 @@
 terraform {
   required_providers {
-    vultr = {
-      source = "vultr/vultr"
-      version = "2.26.0"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
   }
 }
 
-provider "vultr" {
-  api_key = var.api_key
-}
-
-resource "vultr_instance" "terrariaform-server" {
-  label = "terrariaform-server"
-  plan = var.instance
+provider "aws" {
   region = var.region
-  os_id = var.os
-  script_id = vultr_startup_script.terrariaform-startup-script.id
-  firewall_group_id = vultr_firewall_group.terrariaform-firewall.id 
-  ssh_key_ids = [vultr_ssh_key.terrariaform_ssh_key.id]
 }
 
-resource "vultr_startup_script" "terrariaform-startup-script" {
-  name        = "terrariaform-startup-script"
-  script      = base64encode(file("../scripts/startup.sh"))
-  type        = "boot"
+resource "aws_security_group" "terrariaform-sg" {
+  name = "terrariaform-sg"
+  description = "Security group that enables SSH and game connections"
 }
 
-resource "vultr_firewall_group" "terrariaform-firewall" {
-  description = "Base firewall group for Terrariaform"
+resource "aws_vpc_security_group_ingress_rule" "terrariaform-ssh-allow" {
+  description = "Allow SSH access"
+  security_group_id = aws_security_group.terrariaform-sg.id
+  from_port         = 22
+  to_port           = 22
+  ip_protocol = "tcp"
+  cidr_ipv4 = "0.0.0.0/0"
 }
 
-resource "vultr_firewall_rule" "terrariaform-firewall-rule" {
-  firewall_group_id = vultr_firewall_group.terrariaform-firewall.id
-  protocol          = "tcp"
-  port              = "7777"
-  subnet = "0.0.0.0"
-  subnet_size = 0
-  ip_type = "v4"
+resource "aws_vpc_security_group_ingress_rule" "terrariaform-game-allow" {
+  description = "Allow game connections"
+  security_group_id = aws_security_group.terrariaform-sg.id
+  from_port         = 7777
+  to_port           = 7777
+  ip_protocol = "tcp"
+  cidr_ipv4 = "0.0.0.0/0"
 }
 
-resource "vultr_firewall_rule" "terrariaform-firewall-rule-ssh" {
-  firewall_group_id = vultr_firewall_group.terrariaform-firewall.id
-  protocol          = "tcp"
-  port              = "22"
-  subnet = "0.0.0.0"
-  subnet_size = 0
-  ip_type = "v4"
+resource "aws_vpc_security_group_egress_rule" "terrariaform-all-egress" {
+  description       = "Allow all outbound traffic"
+  security_group_id = aws_security_group.terrariaform-sg.id
+  ip_protocol       = "-1"
+  cidr_ipv4         = "0.0.0.0/0"
 }
 
-resource "vultr_ssh_key" "terrariaform_ssh_key" {
-  name    = "terrariaform-key"
-  ssh_key = var.public_ssh_key
+resource "aws_key_pair" "terrariaform-ssh-key" {
+  key_name   = "terrariaform-ssh-key"
+  public_key = file(var.ssh_key_path)
 }
 
-resource "vultr_reserved_ip" "terrariaform-reserved-ip" {
-  label = "terrariaform-reserved-ip"
-  region = var.region
-  ip_type = "v4"
-  instance_id = vultr_instance.terrariaform-server.id
+data "aws_ami" "terrariaform-ami" {
+  most_recent = true
+  owners      = ["136693071363"] # Debian project owner ID
+
+  filter {
+    name   = "name"
+    values = ["debian-12-amd64-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+}
+
+resource "aws_instance" "example" {
+  ami           = data.aws_ami.terrariaform-ami.id
+  instance_type = var.instance_type
+  
+  vpc_security_group_ids = [aws_security_group.terrariaform-sg.id]
+  key_name = aws_key_pair.terrariaform-ssh-key.key_name
+
+  tags = {
+    Name = "terrariaform-server"
+  }
+
+  user_data = file("../scripts/startup.sh")
+  user_data_replace_on_change = true
 }

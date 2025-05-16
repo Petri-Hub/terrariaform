@@ -11,6 +11,10 @@ provider "aws" {
   region = var.region
 }
 
+resource "aws_eip" "terrariaform-elastic-ip" {
+  instance = aws_instance.example.id
+}
+
 resource "aws_security_group" "terrariaform-sg" {
   name = "terrariaform-sg"
   description = "Security group that enables SSH and game connections"
@@ -66,7 +70,7 @@ data "aws_ami" "terrariaform-ami" {
   }
 }
 
-resource "aws_instance" "example" {
+resource "aws_instance" "terrariaform-server" {
   ami           = data.aws_ami.terrariaform-ami.id
   instance_type = var.instance_type
   

@@ -91,3 +91,19 @@ resource "aws_instance" "terrariaform_server" {
   user_data                   = file("../scripts/startup.sh")
   user_data_replace_on_change = true
 }
+
+resource "aws_ebs_volume" "terrariaform_data" {
+  availability_zone = aws_instance.terrariaform_server.availability_zone
+  size              = 5
+  type              = "sc1"
+  tags = {
+    Name = "terrariaform-volume"
+  }
+}
+
+resource "aws_volume_attachment" "terrariaform_data_attach" {
+  device_name = "/dev/xvdb"
+  volume_id   = aws_ebs_volume.terrariaform_data.id
+  instance_id = aws_instance.terrariaform_server.id
+  force_detach = true
+}

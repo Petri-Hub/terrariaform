@@ -94,8 +94,8 @@ resource "aws_instance" "terrariaform_server" {
 
 resource "aws_ebs_volume" "terrariaform_data" {
   availability_zone = aws_instance.terrariaform_server.availability_zone
-  size              = 5
-  type              = "sc1"
+  size              = 6
+  type              = "gp3"
   tags = {
     Name = "terrariaform-volume"
   }

@@ -5,6 +5,21 @@ INSTALLATION_DIRECTORY="/srv/terrariaform"
 EBS_DEVICE="/dev/xvdb"
 MOUNT_POINT="/mnt/terrariaform-data"
 
+# Disabling interactive prompts
+echo "Setting Debian as non-interactive..."
+export DEBIAN_FRONTEND=noninteractive
+
+# Updating the system and installing packages
+echo "Updating Debian system..."
+apt-get update -y
+apt-get upgrade -y
+
+# Waiting for EBS device to be attached...
+while [ ! -b "$EBS_DEVICE" ]; do
+  echo "Waiting for EBS device $EBS_DEVICE to be attached..."
+  sleep 1
+done
+
 # Formatting the EBS volume
 echo "Formatting EBS volume..."
 mkfs.ext4 $EBS_DEVICE
@@ -21,13 +36,8 @@ if ! grep -q "$EBS_DEVICE" /etc/fstab; then
 fi
 
 # Create server directory on EBS volume for Docker
-echo "Creating directory for on EBS for game server..."
+echo "Creating directory on EBS for game server..."
 mkdir -p $MOUNT_POINT/server
-
-# Updating the system and installing packages
-echo "Updating Debian system..."
-apt-get update -y
-apt-get upgrade -y
 
 # Installing necessary packages
 echo "Installing required packages..."

@@ -3,6 +3,8 @@ services:
     image: 'jacobsmile/tmodloader1.4:latest'
     container_name: 'terrariaform-server'
     restart: unless-stopped
+    stdin_open: true
+    tty: true
     ports:
       - "7777:7777"
     expose:

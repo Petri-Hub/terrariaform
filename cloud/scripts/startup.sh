@@ -54,7 +54,7 @@ systemctl start docker
 
 # Cloning Terrariaform repository
 echo "Cloning Terrariaform repository..."
-git clone -b feat/ebs-volume https://github.com/Petri-Hub/terrariaform.git $INSTALLATION_DIRECTORY
+git clone https://github.com/Petri-Hub/terrariaform.git $INSTALLATION_DIRECTORY
 
 # Creating .env variable (TODO: Pull from cloud)
 echo "Creating .env variable..."

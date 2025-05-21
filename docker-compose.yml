@@ -1,7 +1,7 @@
 services:
   server:
     image: 'jacobsmile/tmodloader1.4:latest'
-    cdontainer_name: 'terrariaform-server'
+    container_name: 'terrariaform-server'
     restart: unless-stopped
     ports:
       - "7777:7777"

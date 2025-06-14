@@ -19,3 +19,15 @@ variable "vercel_api_token" {
   type        = string
   sensitive = true
 }
+
+variable "vercel_domain_name" {
+  description = "The domain name managed by Vercel"
+  type        = string
+  default     = "petri.codes"
+}
+
+variable "vercel_terraria_subdomain" {
+  description = "The subdomain for the Terraria server"
+  type        = string
+  default     = "terraria"
+}

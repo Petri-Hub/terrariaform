@@ -94,3 +94,12 @@ resource "aws_volume_attachment" "terrariaform_data_attach" {
   instance_id = aws_instance.terrariaform_server.id
   force_detach = true
 }
+
+# Vercel DNS Configuration
+resource "vercel_dns_record" "terraria_subdomain" {
+  domain = var.vercel_domain_name
+  type   = "A"
+  name   = var.vercel_terraria_subdomain
+  value  = aws_eip.terrariaform_elastic_ip.public_ip
+  ttl    = 60
+}

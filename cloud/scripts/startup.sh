@@ -20,9 +20,14 @@ while [ ! -b "$EBS_DEVICE" ]; do
   sleep 1
 done
 
-# Formatting the EBS volume
-echo "Formatting EBS volume..."
-mkfs.ext4 $EBS_DEVICE
+# Check if the EBS volume is already formatted
+echo "Checking if EBS volume is formatted..."
+if ! blkid $EBS_DEVICE; then
+  echo "EBS volume is not formatted. Formatting now..."
+  mkfs.ext4 $EBS_DEVICE
+else
+  echo "EBS volume is already formatted. Skipping format."
+fi
 
 # Mounting the volume
 echo "Mounting EBS volume..."
@@ -54,7 +59,7 @@ systemctl start docker
 
 # Cloning Terrariaform repository
 echo "Cloning Terrariaform repository..."
-git clone https://github.com/Petri-Hub/terrariaform.git $INSTALLATION_DIRECTORY
+git clone -b feat/ebs-volume https://github.com/Petri-Hub/terrariaform.git $INSTALLATION_DIRECTORY
 
 # Creating .env variable (TODO: Pull from cloud)
 echo "Creating .env variable..."

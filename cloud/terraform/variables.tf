@@ -13,3 +13,9 @@ variable "ssh_key_path" {
   type        = string
   sensitive = true
 }
+
+variable "vercel_api_token" {
+  description = "Vercel API token"
+  type        = string
+  sensitive = true
+}

@@ -20,6 +20,11 @@ variable "vercel_api_token" {
   sensitive = true
 }
 
+variable "vercel_team_id" {
+  description = "Vercel team ID for managing the domain"
+  type        = string
+}
+
 variable "vercel_domain_name" {
   description = "The domain name managed by Vercel"
   type        = string

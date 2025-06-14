@@ -95,7 +95,6 @@ resource "aws_volume_attachment" "terrariaform_data_attach" {
   force_detach = true
 }
 
-# Vercel DNS Configuration
 resource "vercel_dns_record" "terraria_subdomain" {
   domain = var.vercel_domain_name
   type   = "A"

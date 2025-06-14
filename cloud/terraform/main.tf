@@ -1,16 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.region
-}
-
 resource "aws_eip" "terrariaform_elastic_ip" {
   instance = aws_instance.terrariaform_server.id
   tags = {

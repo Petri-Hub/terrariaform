@@ -30,8 +30,6 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
-    build: 
-      context: ./services/api
-      dockerfile: ./docker/Dockerfile 
+    build: ./services/api 
     environment:
       - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"

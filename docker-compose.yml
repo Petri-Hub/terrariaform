@@ -27,9 +27,9 @@ services:
       - "/mnt/terrariaform-data/server:/data"
   api:
     container_name: terrariaform-api
+    build: ./services/api 
     restart: unless-stopped
     ports:
       - "3000:3000"
-    build: ./services/api 
     environment:
       - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"

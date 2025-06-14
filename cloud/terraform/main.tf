@@ -1,16 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.region
-}
-
 resource "aws_eip" "terrariaform_elastic_ip" {
   instance = aws_instance.terrariaform_server.id
   tags = {
@@ -90,4 +77,20 @@ resource "aws_instance" "terrariaform_server" {
 
   user_data                   = file("../scripts/startup.sh")
   user_data_replace_on_change = true
+}
+
+resource "aws_ebs_volume" "terrariaform_data" {
+  availability_zone = aws_instance.terrariaform_server.availability_zone
+  size              = 6
+  type              = "gp3"
+  tags = {
+    Name = "terrariaform-volume"
+  }
+}
+
+resource "aws_volume_attachment" "terrariaform_data_attach" {
+  device_name = "/dev/xvdb"
+  volume_id   = aws_ebs_volume.terrariaform_data.id
+  instance_id = aws_instance.terrariaform_server.id
+  force_detach = true
 }

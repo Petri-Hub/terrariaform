@@ -1,7 +1,7 @@
 FROM oven/bun:1
 WORKDIR /api
 
-COPY ../ .
+COPY . .
 RUN bun install
 
 EXPOSE 3000

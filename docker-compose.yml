@@ -3,33 +3,33 @@ services:
     image: 'jacobsmile/tmodloader1.4:latest'
     container_name: 'terrariaform-server'
     restart: unless-stopped
+    stdin_open: true
+    tty: true
     ports:
       - "7777:7777"
     expose:
       - "7777"
     environment:
-      - "TMOD_AUTODOWNLOAD=${TMOD_AUTODOWNLOAD}"
-      - "TMOD_ENABLEDMODS=${TMOD_ENABLEDMODS}"
-      - "TMOD_SHUTDOWN_MESSAGE=${TMOD_SHUTDOWN_MESSAGE}"
-      - "TMOD_AUTOSAVE_INTERVAL=${TMOD_AUTOSAVE_INTERVAL}"
-      - "TMOD_MOTD=${TMOD_MOTD}"
-      - "TMOD_PASS=${TMOD_PASS}"
-      - "TMOD_MAXPLAYERS=${TMOD_MAXPLAYERS}"
-      - "TMOD_WORLDNAME=${TMOD_WORLDNAME}"
-      - "TMOD_WORLDSIZE=${TMOD_WORLDSIZE}"
-      - "TMOD_WORLDSEED=${TMOD_WORLDSEED}"
-      - "TMOD_DIFFICULTY=${TMOD_DIFFICULTY}"
-      - "TMOD_USECONFIGFILE=${TMOD_USECONFIGFILE}"
-      - "UPDATE_NOTICE=${UPDATE_NOTICE}"
+      - "TMOD_AUTODOWNLOAD=${SERVER_TMOD_AUTODOWNLOAD}"
+      - "TMOD_ENABLEDMODS=${SERVER_TMOD_ENABLEDMODS}"
+      - "TMOD_SHUTDOWN_MESSAGE=${SERVER_TMOD_SHUTDOWN_MESSAGE}"
+      - "TMOD_AUTOSAVE_INTERVAL=${SERVER_TMOD_AUTOSAVE_INTERVAL}"
+      - "TMOD_MOTD=${SERVER_TMOD_MOTD}"
+      - "TMOD_PASS=${SERVER_TMOD_PASS}"
+      - "TMOD_MAXPLAYERS=${SERVER_TMOD_MAXPLAYERS}"
+      - "TMOD_WORLDNAME=${SERVER_TMOD_WORLDNAME}"
+      - "TMOD_WORLDSIZE=${SERVER_TMOD_WORLDSIZE}"
+      - "TMOD_WORLDSEED=${SERVER_TMOD_WORLDSEED}"
+      - "TMOD_DIFFICULTY=${SERVER_TMOD_DIFFICULTY}"
+      - "TMOD_USECONFIGFILE=${SERVER_TMOD_USECONFIGFILE}"
+      - "UPDATE_NOTICE=${SERVER_UPDATE_NOTICE}"
     volumes:
-      - "./services/server:/data"
-  # api:
-  #   container_name: terrariaform-api
-  #   restart: unless-stopped
-  #   ports:
-  #     - "3000:3000"
-  #   build: 
-  #     context: ./services/api
-  #     dockerfile: ./docker/Dockerfile 
-  #   environment:
-  #     - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"
+      - "/mnt/terrariaform-data/server:/data"
+  api:
+    container_name: terrariaform-api
+    build: ./services/api 
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"

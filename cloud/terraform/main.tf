@@ -41,7 +41,7 @@ resource "aws_vpc_security_group_egress_rule" "terrariaform_all_egress" {
 
 resource "aws_key_pair" "terrariaform_ssh_key" {
   key_name   = "terrariaform-ssh-key"
-  public_key = file(var.ssh_key_path)
+  public_key = file(var.aws_ssh_key_path)
 }
 
 data "aws_ami" "terrariaform_ami" {
@@ -66,7 +66,7 @@ data "aws_ami" "terrariaform_ami" {
 
 resource "aws_instance" "terrariaform_server" {
   ami           = data.aws_ami.terrariaform_ami.id
-  instance_type = var.instance_type
+  instance_type = var.aws_instance_type
 
   vpc_security_group_ids = [aws_security_group.terrariaform_sg.id]
   key_name               = aws_key_pair.terrariaform_ssh_key.key_name
@@ -93,4 +93,12 @@ resource "aws_volume_attachment" "terrariaform_data_attach" {
   volume_id   = aws_ebs_volume.terrariaform_data.id
   instance_id = aws_instance.terrariaform_server.id
   force_detach = true
+}
+
+resource "vercel_dns_record" "terraria_subdomain" {
+  domain = var.vercel_domain_name
+  type   = "A"
+  name   = var.vercel_terraria_subdomain
+  value  = aws_eip.terrariaform_elastic_ip.public_ip
+  ttl    = 60
 }

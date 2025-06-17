@@ -61,25 +61,9 @@ systemctl start docker
 echo "Cloning Terrariaform repository..."
 git clone https://github.com/Petri-Hub/terrariaform.git $INSTALLATION_DIRECTORY
 
-# Creating .env variable (TODO: Pull from cloud)
+# Creating .env variable from Terraform template
 echo "Creating .env variable..."
-echo "
-    SERVER_TMOD_AUTODOWNLOAD=2824688266,2824688072
-    SERVER_TMOD_ENABLEDMODS=2824688266,2824688072
-    SERVER_TMOD_SHUTDOWN_MESSAGE=Morram
-    SERVER_TMOD_AUTOSAVE_INTERVAL=15
-    SERVER_TMOD_MOTD=Tralalero Tralala
-    SERVER_TMOD_PASS=
-    SERVER_TMOD_MAXPLAYERS=32
-    SERVER_TMOD_WORLDNAME=Baguncinha
-    SERVER_TMOD_WORLDSIZE=1
-    SERVER_TMOD_WORLDSEED=bombardinocrocodilo
-    SERVER_TMOD_DIFFICULTY=1
-    SERVER_TMOD_USECONFIGFILE=No
-    SERVER_UPDATE_NOTICE=false
-
-    API_HEALTH_CHECK_TEXT=Server is running!
-" > $INSTALLATION_DIRECTORY/.env
+echo '${env_config}' > $INSTALLATION_DIRECTORY/.env
 
 # Starting the server
 echo "Starting Terraria server..."

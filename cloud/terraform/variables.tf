@@ -34,3 +34,9 @@ variable "vercel_terraria_subdomain" {
   description = "The subdomain for the Terraria server"
   type        = string
 }
+
+variable "env_file_path" {
+  description = "Path to the .env file containing server configuration"
+  type        = string
+  default     = "../../.env"
+}

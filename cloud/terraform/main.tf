@@ -84,8 +84,10 @@ resource "aws_instance" "terrariaform_server" {
     Name = "terrariaform-server"
   }
 
-  user_data                   = file("../scripts/startup.sh")
   user_data_replace_on_change = true
+  user_data = templatefile("../scripts/startup.sh", {
+    env_config = file(var.env_file_path)
+  })
 }
 
 resource "aws_ebs_volume" "terrariaform_data" {

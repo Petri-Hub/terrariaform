@@ -94,8 +94,16 @@ resource "aws_ebs_volume" "terrariaform_data" {
   availability_zone = aws_instance.terrariaform_server.availability_zone
   size              = 6
   type              = "gp3"
+  
+  # Prevents accidental destruction of the volume.
+  # This would erase all game data.
+  lifecycle {
+    prevent_destroy = var.secure_destruction
+  }
+  
   tags = {
     Name = "terrariaform-volume"
+    Type = "GameData"
   }
 }
 

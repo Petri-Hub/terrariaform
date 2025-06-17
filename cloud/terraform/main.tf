@@ -95,6 +95,8 @@ resource "aws_ebs_volume" "terrariaform_data" {
   size              = 6
   type              = "gp3"
   
+  # Prevents accidental destruction of the volume.
+  # This would erase all game data.
   lifecycle {
     prevent_destroy = var.secure_destruction
   }

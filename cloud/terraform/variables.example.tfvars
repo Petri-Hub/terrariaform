@@ -6,3 +6,4 @@ vercel_team_id =
 vercel_team_id =
 vercel_domain_name =
 vercel_terraria_subdomain =
+secure_destruction =

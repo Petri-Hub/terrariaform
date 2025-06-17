@@ -40,3 +40,9 @@ variable "env_file_path" {
   type        = string
   default     = "../../.env"
 }
+
+variable "secure_destruction" {
+  description = "Set to false to allow destruction of persistent EBS volumes. Use with caution!"
+  type        = bool
+  default     = true
+}

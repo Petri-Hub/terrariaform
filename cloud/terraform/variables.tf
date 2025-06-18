@@ -31,7 +31,12 @@ variable "vercel_domain_name" {
 }
 
 variable "vercel_terraria_subdomain" {
-  description = "The subdomain for the Terraria server"
+  description = "The subdomain for the Terraria game server"
+  type        = string
+}
+
+variable "vercel_terrariaform_subdomain" {
+  description = "The subdomain for the Terrariaform website"
   type        = string
 }
 

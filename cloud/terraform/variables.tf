@@ -35,14 +35,25 @@ variable "vercel_terraria_subdomain" {
   type        = string
 }
 
-variable "env_file_path" {
-  description = "Path to the .env file containing server configuration"
+variable "supabase_access_token" {
+  description = "Supabase access token for managing projects"
   type        = string
-  default     = "../../.env"
+  sensitive   = true
 }
 
-variable "secure_destruction" {
-  description = "Set to false to allow destruction of persistent EBS volumes. Use with caution!"
-  type        = bool
-  default     = true
+variable "supabase_db_password" {
+  description = "Database password for the Supabase project"
+  type        = string
+  sensitive   = true
+}
+
+variable "supabase_region" {
+  description = "Supabase project region"
+  type        = string
+}
+
+variable "supabase_organization_id" {
+  description = "Supabase organization ID"
+  type        = string
+  default     = null
 }

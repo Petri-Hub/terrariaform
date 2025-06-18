@@ -86,7 +86,7 @@ resource "aws_instance" "terrariaform_server" {
 
   user_data_replace_on_change = true
   user_data = templatefile("../scripts/startup.sh", {
-    env_config = file(var.env_file_path)
+    env_config = file("../../.env")
   })
 }
 
@@ -98,7 +98,7 @@ resource "aws_ebs_volume" "terrariaform_data" {
   # Prevents accidental destruction of the volume.
   # This would erase all game data.
   lifecycle {
-    prevent_destroy = var.secure_destruction
+    prevent_destroy = true
   }
   
   tags = {
@@ -120,4 +120,17 @@ resource "vercel_dns_record" "terraria_subdomain" {
   name   = var.vercel_terraria_subdomain
   value  = aws_eip.terrariaform_elastic_ip.public_ip
   ttl    = 60
+}
+
+resource "supabase_project" "terrariaform" {
+  organization_id   = var.supabase_organization_id
+  name              = "terrariaform"
+  database_password = var.supabase_db_password
+  region            = var.supabase_region
+
+  # Prevents accidental destruction of the volume.
+  # This would erase all server monitoring data.
+  lifecycle {
+    prevent_destroy = true
+  }
 }

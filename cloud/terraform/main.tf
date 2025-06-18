@@ -131,7 +131,7 @@ resource "vercel_deployment" "terrariaform_deploy" {
   ref = "master"
 }
 
-resource "vercel_project_domain" "name" {
+resource "vercel_project_domain" "terrariaform_domain" {
   project_id = vercel_project.terrariaform_web.id
   domain     = var.vercel_terrariaform_subdomain
 }

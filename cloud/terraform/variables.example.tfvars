@@ -6,6 +6,7 @@ vercel_team_id =
 vercel_team_id =
 vercel_domain_name =
 vercel_terraria_subdomain =
+vercel_terrariaform_subdomain =
 supabase_access_token =
 supabase_db_password =
 supabase_region =

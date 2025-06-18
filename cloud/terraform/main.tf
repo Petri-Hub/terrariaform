@@ -114,6 +114,28 @@ resource "aws_volume_attachment" "terrariaform_data_attach" {
   force_detach = true
 }
 
+resource "vercel_project" "terrariaform_web" {
+  name = "terrariaform-web"
+  framework = "nextjs"
+  root_directory = "services/web"
+
+  git_repository = {
+    type = "github"
+    repo = "Petri-Hub/terrariaform"
+  }
+}
+
+resource "vercel_deployment" "terrariaform_deploy" {
+  project_id = vercel_project.terrariaform_web.id
+  production = true
+  ref = "master"
+}
+
+resource "vercel_project_domain" "name" {
+  project_id = vercel_project.terrariaform_web.id
+  domain     = var.vercel_terrariaform_subdomain
+}
+
 resource "vercel_dns_record" "terraria_subdomain" {
   domain = var.vercel_domain_name
   type   = "A"
@@ -134,3 +156,4 @@ resource "supabase_project" "terrariaform" {
     prevent_destroy = true
   }
 }
+

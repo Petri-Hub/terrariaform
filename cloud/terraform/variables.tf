@@ -55,5 +55,4 @@ variable "supabase_region" {
 variable "supabase_organization_id" {
   description = "Supabase organization ID"
   type        = string
-  default     = null
 }

@@ -128,7 +128,7 @@ resource "supabase_project" "terrariaform" {
   database_password = var.supabase_db_password
   region            = var.supabase_region
 
-  # Prevents accidental destruction of the volume.
+  # Prevents accidental destruction of the database.
   # This would erase all server monitoring data.
   lifecycle {
     prevent_destroy = true

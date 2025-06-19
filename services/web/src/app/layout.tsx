@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hello World!",
-  description: "Test",
+  title: "Terrariaform",
+  description: "Manage your Terrariaform deployment with ease",
 };
 
 export default function RootLayout({

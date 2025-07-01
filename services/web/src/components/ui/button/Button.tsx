@@ -1,4 +1,5 @@
 import { ForwardedRef, forwardRef } from "react";
+import { tv } from "tailwind-variants";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 

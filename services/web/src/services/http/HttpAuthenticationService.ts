@@ -10,12 +10,13 @@ export class HttpAuthenticationService extends HttpService implements Authentica
   public async login(request: LoginRequest): Promise<AuthenticationResponse> {
     try{
 
-        const { data } = await this.post<AuthenticationResponse, LoginRequest>(
-            '/auth/login', 
-            request
-        )
-
-        return data
+        return {
+            token: "mocked-token",
+            user: {
+                id: "mocked-user-id",
+                email: request.email,
+            }
+        }
 
     } catch(error){
         throw new AuthenticationError();

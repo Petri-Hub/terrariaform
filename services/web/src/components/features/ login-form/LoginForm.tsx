@@ -1,12 +1,13 @@
 'use client'
 
-import { useFormState, useFormStatus } from 'react-dom'
+import { , useFormStatus } from 'react-dom'
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { Label } from "@/components/ui/label"
 import { authenticate } from "@/actions/authenticate/authenticate"
+import { useActionState } from 'react'
 
 function SubmitButton() {
   const { pending } = useFormStatus()
@@ -19,11 +20,11 @@ function SubmitButton() {
 }
 
 export default function LoginForm() {
-  const [state, formAction] = useFormState(authenticate, undefined)
+  const [state, formAction] = useActionState(authenticate, false)
 
   return (
     <div>
-      <div>
+      <div> 
         <div>🗄️</div>
         <h1>Terrarriaform</h1>
       </div>

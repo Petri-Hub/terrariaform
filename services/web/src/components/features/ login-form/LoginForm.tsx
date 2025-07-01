@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Link } from "@/components/ui/link"
 import { Label } from "@/components/ui/label"
-import { authenticate } from "@/actions/auth/authenticate"
+import { authenticate } from "@/actions/authenticate/authenticate"
 
 function SubmitButton() {
   const { pending } = useFormStatus()

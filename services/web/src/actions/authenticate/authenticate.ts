@@ -3,7 +3,6 @@
 import { ActionResult } from '@/types/ActionResult'
 import { ErrorMessages } from '@/constants/ErrorMessages'
 import { handleActionError } from '@/utils/handleActionError'
-import { redirect } from 'next/navigation'
 
 type AuthenticationCredentials = {
     email: string
@@ -23,6 +22,6 @@ export async function authenticate({ email, password }: AuthenticationCredential
     
 
   } catch (error) {
-    return handleActionError(error, ErrorMessages.AuthenticationFailed)
+    return handleActionError(error)
   }
 }

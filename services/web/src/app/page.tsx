@@ -1,5 +1,5 @@
-export default function Home() {
-  return (
-    <h1>Hellow World!</h1>
-  );
+import LoginForm from "@/components/features/ login-form/LoginForm"
+
+export default function Auth() {
+  return <LoginForm />
 }

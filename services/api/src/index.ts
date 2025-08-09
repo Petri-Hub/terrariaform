@@ -1,5 +1,6 @@
 import { Hono } from 'hono'
 import { errorHandler } from './middlewares/errorHandlerMiddleware'
+import { authMiddleware } from './middlewares/authMiddleware'
 import { health } from './routes/health'
 import { system } from './routes/system'
 import { containers } from './routes/containers'
@@ -7,6 +8,7 @@ import { containers } from './routes/containers'
 const app = new Hono()
 
 app.use(errorHandler)
+app.use(authMiddleware)
 
 app.route('/health', health)
 app.route('/system', system)

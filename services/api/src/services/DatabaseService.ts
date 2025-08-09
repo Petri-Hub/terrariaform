@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3';
+import { Database } from 'bun:sqlite';
 import { join } from 'path';
 
 export interface MetricRecord {
@@ -23,7 +23,7 @@ export interface MemoryMetricData {
 }
 
 export abstract class DatabaseService {
-    private static db: Database.Database | null = null;
+    private static db: Database | null = null;
 
     static initialize(): void {
         try {
@@ -54,7 +54,7 @@ export abstract class DatabaseService {
         }
     }
 
-    static getDatabase(): Database.Database {
+    static getDatabase(): Database {
         if (!this.db) {
             this.initialize();
         }

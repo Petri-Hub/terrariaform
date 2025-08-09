@@ -9,7 +9,11 @@ export async function authMiddleware(context: Context, next: Next) {
     }
     
     const parts = authHeader.split(' ')
-    if (parts.length !== 2 || parts[0] !== 'Bearer') {
+    
+    const isAuthorizationPartsDivisionsInvalid = parts.length !== 2
+    const isTokenPrefixDifferentThanBearer = parts[0] !== 'Bearer'
+    
+    if (isAuthorizationPartsDivisionsInvalid || isTokenPrefixDifferentThanBearer) {
         throw new UnauthorizedError()
     }
     

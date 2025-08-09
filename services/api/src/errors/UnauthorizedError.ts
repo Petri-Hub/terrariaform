@@ -6,8 +6,8 @@ import { DomainError } from './DomainError'
 export class UnauthorizedError extends DomainError {
     constructor(){
         super(
-            ErrorMessage.UNAUTHORIZED,
-            ErrorCode.UNAUTHORIZED,
+            ErrorMessage.AuthorizationError,
+            ErrorCode.AuthorizationError,
             StatusCode.UNAUTHORIZED
         )
     }

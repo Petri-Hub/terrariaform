@@ -23,7 +23,7 @@ export abstract class CpuService {
             return {
                 name: cpu.brand,
                 manufacturer: cpu.manufacturer,
-                temperature: temperature.main,
+                temperature: temperature.main || 0,
                 usage
             }
         } catch(error) {

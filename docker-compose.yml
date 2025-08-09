@@ -33,3 +33,6 @@ services:
       - "3000:3000"
     environment:
       - "API_HEALTH_CHECK_TEXT=${API_HEALTH_CHECK_TEXT}"
+      - "API_BEARER_TOKEN=test123"
+    volumes:
+      - "/mnt/terrariaform-data/api:/api/data"

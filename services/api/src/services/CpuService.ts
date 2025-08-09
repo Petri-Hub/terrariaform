@@ -1,7 +1,7 @@
 import si from "systeminformation";
-import { CpuUsageDetails } from "../types/CpuUsageInformation";
+import { CpuUsageDetails } from "../types/CpuUsageDetails";
 import {  CpuDetailsRetrievalError } from "../errors/CpuDetailsRetrievalError";
-import { CpuDetails } from "../types/CpuInformation";
+import { CpuDetails } from "../types/CpuDetails";
 import { simplifyPercentage } from "../utils/simplifyPercentage";
 
 export abstract class CpuService {

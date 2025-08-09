@@ -6,7 +6,8 @@ export abstract class DomainError {
     constructor(
         private readonly message: ErrorMessage,
         private readonly code: ErrorCode,
-        private readonly statusCode: StatusCode
+        private readonly statusCode: StatusCode,
+        private readonly error?: Error
     ){}
 
     public getMessage(): ErrorMessage {
@@ -19,5 +20,9 @@ export abstract class DomainError {
 
     public getStatusCode(): StatusCode {
         return this.statusCode
+    }
+
+    public getInnerError(): Error | undefined {
+        return this.error
     }
 }

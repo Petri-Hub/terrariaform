@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model CpuMetric {
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime @default(now())
+  
+  // CPU usage details
+  totalUsage  Float
+  systemUsage Float
+  userUsage   Float
+  coreUsages  String // JSON string of core usage array
+  
+  // CPU hardware details
+  name         String
+  manufacturer String
+  temperature  Float
+  
+  @@map("cpu_metrics")
+}
+
+model MemoryMetric {
+  id        Int      @id @default(autoincrement())
+  timestamp DateTime @default(now())
+  
+  // Memory details
+  total Float
+  used  Float
+  free  Float
+  
+  @@map("memory_metrics")
+}

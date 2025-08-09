@@ -1,4 +1,4 @@
-import { CpuDetails } from '../types/CpuInformation'
+import { CpuDetails } from '../types/CpuDetails'
 import { MemoryDetails } from '../types/MemoryDetails'
 import { OperatingSystemDetails } from '../types/OperatingSystemDetails'
 import { CpuService } from './CpuService'

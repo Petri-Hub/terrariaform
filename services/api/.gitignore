@@ -1,0 +1,4 @@
+# API build artifacts
+src/**/*.js
+*.js
+!node_modules/**/*

@@ -14,8 +14,6 @@ export class DataCollectionService {
         // Run every 10 seconds
         this.task = cron.schedule('*/10 * * * * *', async () => {
             await this.collectMetrics()
-        }, {
-            scheduled: false
         })
 
         this.task.start()

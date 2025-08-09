@@ -7,13 +7,21 @@
     "url": "https://petri.codes"
   },
   "scripts": {
-    "dev": "bun run --hot /src/index.ts"
+    "dev": "bun run --hot /src/index.ts",
+    "postinstall": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "^6.13.0",
     "hono": "^4.7.8",
+    "node-cron": "^4.2.1",
+    "prisma": "^6.13.0",
     "systeminformation": "^5.25.11"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/node-cron": "^3.0.11"
   }
 }
